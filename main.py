@@ -7,16 +7,18 @@ def mse(a, b):
 
 
 if __name__ == "__main__":
-    np.random.seed(seed=42)
     # Three groups of 50 samples each
     # n is number of samples, k is number of groups. k must divide n
-    n = 150
-    k = 3
+    n = 10000
+    k = 1
     group_size = n // k
 
+    np.random.seed(seed=42)
     X = np.random.normal(0.0, 1.0, (n, 5))
-    beta = np.transpose(np.array([[1, 2, -5, 3, -3]]))
-    U = np.random.normal(0.0, 1, (k, 1))
+    beta = np.transpose(np.array([[1, 2, -.4, 3, -3]]))
+
+    np.random.seed(seed=42)
+    U = np.random.normal(1.0, 1, (k, 1))
 
     eta = np.matmul(X, beta)
 
@@ -35,4 +37,5 @@ if __name__ == "__main__":
     # make beta_hat a 2-d array
     beta_hat = glm_results.params[:, np.newaxis]
     print(mse(beta_hat, beta))
+    print(beta_hat)
 
